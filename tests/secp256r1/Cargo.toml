@@ -1,0 +1,8 @@
+[package]
+name = "openvm-test-secp256r1"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+revm-precompile = { git = "https://github.com/scroll-tech/revm", branch = "scroll-evm-executor/feat/v55/euclid-v2", default-features = false, features = ["secp256r1"] }
+openvm = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.0.0-rc.1", features = ["std"] }

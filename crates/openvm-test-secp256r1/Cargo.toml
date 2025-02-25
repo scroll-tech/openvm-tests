@@ -1,8 +1,0 @@
-[package]
-name = "openvm-test-secp256r1"
-version = "0.1.0"
-edition = "2021"
-
-[dependencies]
-openvm = { workspace = true, features = ["std"] }
-revm-precompile = { workspace = true, features = ["secp256r1"] }
