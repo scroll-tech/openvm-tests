@@ -38,5 +38,4 @@ fn main() {
 
     secp256r1::test_all();
     println!("p256 test done");
-
 }
