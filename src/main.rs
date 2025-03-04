@@ -76,7 +76,7 @@ macro_rules! should_eq {
 #[macro_export]
 macro_rules! should_be_true {
     ($cond:expr, $($arg:tt)+) => {
-        if !cond {
+        if !$cond {
             println!("fail: {}", format_args!($($arg)+));
             #[cfg(feature = "strict")]
             assert!($cond, $($arg)+);
