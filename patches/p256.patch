@@ -1,0 +1,53 @@
+diff --git a/Cargo.toml b/Cargo.toml
+index 307efaff..9e25bec5 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -242,6 +242,7 @@ bytemuck = { version = "1.20.0", default-features = false }
+ # cryptography, default-features = false for no_std
+ tiny-keccak = { version = "2.0.2", features = ["keccak"] }
+ k256 = { version = "0.13.3", default-features = false }
++p256 = { version = "0.13.2", default-features = false }
+ elliptic-curve = { version = "0.13.8", default-features = false }
+ ecdsa = { version = "0.16.9", default-features = false }
+ num-bigint = { version = "0.4.6", default-features = false }
+diff --git a/extensions/ecc/guest/Cargo.toml b/extensions/ecc/guest/Cargo.toml
+index c4d94201..35a6e565 100644
+--- a/extensions/ecc/guest/Cargo.toml
++++ b/extensions/ecc/guest/Cargo.toml
+@@ -17,6 +17,7 @@ strum_macros.workspace = true
+ ecdsa = { workspace = true, features = ["verifying"] }
+ elliptic-curve = { workspace = true, features = ["arithmetic", "sec1"] }
+ k256 = { workspace = true, optional = true }
++p256 = { workspace = true, optional = true }
+ hex-literal = { workspace = true }
+ openvm-rv32im-guest = { workspace = true }
+ openvm-algebra-guest = { workspace = true }
+@@ -40,5 +41,4 @@ std = ["openvm/std"]
+ # only enable for the curves you use as it affects the init! macro
+ k256 = ["dep:k256"]
+ halo2curves = ["dep:halo2curves-axiom", "openvm-algebra-guest/halo2curves"]
+-
+-p256 = []
++p256 = ["dep:p256"]
+diff --git a/extensions/ecc/guest/src/p256.rs b/extensions/ecc/guest/src/p256.rs
+index f32825d5..00d78255 100644
+--- a/extensions/ecc/guest/src/p256.rs
++++ b/extensions/ecc/guest/src/p256.rs
+@@ -36,8 +36,6 @@ pub const CURVE_B: P256Coord = P256Coord::from_const_bytes(hex!(
+     "4b60d2273e3cce3bf6b053ccb0061d65bc86987655bdebb3e7933aaad835c65a"
+ ));
+ 
+-pub struct P256;
+-
+ openvm_ecc_sw_macros::sw_declare! {
+     P256Point { mod_type = P256Coord, a = CURVE_A, b = CURVE_B },
+ }
+@@ -76,7 +74,7 @@ impl CyclicGroup for P256Point {
+     };
+ }
+ 
+-impl IntrinsicCurve for P256 {
++impl IntrinsicCurve for p256::NistP256 {
+     type Scalar = P256Scalar;
+     type Point = P256Point;
+ 
