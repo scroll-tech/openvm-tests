@@ -4,23 +4,25 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-revm-precompile = { git = "https://github.com/scroll-tech/revm", branch = "scroll-evm-executor/feat/v55/euclid-v2", default-features = false, features = ["secp256r1", "openvm"] }
-openvm = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", features = ["std"] }
-openvm-algebra-complex-macros = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false }
-openvm-algebra-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false }
-openvm-bigint-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false }
-#openvm-build ={ git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false }
-#openvm-circuit ={ git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false }
-#openvm-native-circuit = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false }
-#openvm-native-transpiler = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false }
-#openvm-native-compiler = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false }
-#openvm-native-recursion = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false }
-openvm-ecc-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false, features = ["k256", "p256"]}
-#openvm-instructions ={ git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false }
-openvm-sha256-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false }
-openvm-keccak256-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false }
-openvm-pairing-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false, features = ["bn254"]}
-openvm-rv32im-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false }
+hex-literal = "1.0"
+
+revm-precompile = { git = "https://github.com/scroll-tech/revm", branch = "scroll-evm-executor/feat/v55/euclid-v2", default-features = false, features = ["secp256r1"] }
+openvm = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", features = ["std"], optional = true }
+openvm-algebra-complex-macros = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false, optional = true }
+openvm-algebra-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false, optional = true }
+openvm-bigint-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false, optional = true }
+#openvm-build ={ git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false, optional = true }
+#openvm-circuit ={ git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false, optional = true }
+#openvm-native-circuit = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false, optional = true }
+#openvm-native-transpiler = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false, optional = true }
+#openvm-native-compiler = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false, optional = true }
+#openvm-native-recursion = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false, optional = true }
+openvm-ecc-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false, features = ["k256", "p256"], optional = true}
+#openvm-instructions ={ git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false, optional = true }
+openvm-sha256-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false, optional = true }
+openvm-keccak256-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false, optional = true }
+openvm-pairing-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false, features = ["bn254"], optional = true}
+openvm-rv32im-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", branch = "main", default-features = false, optional = true }
 
 p256 = { version = "0.13.2", default-features = false, features = [
     "ecdsa",
@@ -28,4 +30,26 @@ p256 = { version = "0.13.2", default-features = false, features = [
 k256 = { version = "0.13.3", default-features = false, features = ["ecdsa"] }
 ecdsa-core = { version = "0.16.9", package = "ecdsa", default-features = false, features = ["der"] }
 primeorder = {version = "0.13"}
-hex = "0.4.3"
+
+[features]
+default = ["openvm"]
+openvm = [
+    "dep:openvm",
+    "dep:openvm-algebra-complex-macros",
+    "dep:openvm-algebra-guest",
+    "dep:openvm-bigint-guest",
+    #"dep:openvm-build",
+    #"dep:openvm-circuit",
+    #"dep:openvm-native-circuit",
+    #"dep:openvm-native-transpiler",
+    #"dep:openvm-native-compiler",
+    #"dep:openvm-native-recursion",
+    "dep:openvm-ecc-guest",
+    #"dep:openvm-instructions",
+    "dep:openvm-sha256-guest",
+    "dep:openvm-keccak256-guest",
+    "dep:openvm-pairing-guest",
+    "dep:openvm-rv32im-guest",
+
+    "revm-precompile/openvm"
+]

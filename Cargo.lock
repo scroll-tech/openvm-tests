@@ -149,9 +149,9 @@ dependencies = [
 
 [[package]]
 name = "bytemuck"
-version = "1.21.0"
+version = "1.22.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ef657dfab802224e671f5818e9a4935f9b1957ed18e58292690cc39e7a4092a3"
+checksum = "b6b1fc10dbac614ebc03540c9dbd60e83887fda27794998c6528f1782047d540"
 
 [[package]]
 name = "byteorder"
@@ -469,6 +469,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6fe2267d4ed49bc07b63801559be28c718ea06c4738b7a03c94df7386d2cde46"
 
 [[package]]
+name = "hex-literal"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bcaaec4551594c969335c98c903c1397853d4198408ea609190f420500f6be71"
+
+[[package]]
 name = "hmac"
 version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -479,9 +485,9 @@ dependencies = [
 
 [[package]]
 name = "itertools"
-version = "0.14.0"
+version = "0.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2b192c782037fadd9cfa75548310488aabdbf3d2da73885b31bd0abd03351285"
+checksum = "413ee7dfc52ee1a4949ceeb7dbc8a33f2d6c088194d9f922fb8318faf1f01186"
 dependencies = [
  "either",
 ]
@@ -618,10 +624,10 @@ checksum = "945462a4b81e43c4e3ba96bd7b49d834c6f61198356aa858733bc4acf3cbe62e"
 [[package]]
 name = "openvm"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#080fa6762bd6434bf74860ea5eb147c9d4c0d7a1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=f1b4844#f1b484499b9c059d14949cdfaa648906757ca7aa"
 dependencies = [
  "bytemuck",
- "hex-literal",
+ "hex-literal 0.4.1",
  "num-bigint",
  "num-traits",
  "openvm-platform",
@@ -632,7 +638,7 @@ dependencies = [
 [[package]]
 name = "openvm-algebra-complex-macros"
 version = "0.1.0"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#080fa6762bd6434bf74860ea5eb147c9d4c0d7a1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=f1b4844#f1b484499b9c059d14949cdfaa648906757ca7aa"
 dependencies = [
  "openvm-macros-common",
  "quote",
@@ -642,7 +648,7 @@ dependencies = [
 [[package]]
 name = "openvm-algebra-guest"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#080fa6762bd6434bf74860ea5eb147c9d4c0d7a1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=f1b4844#f1b484499b9c059d14949cdfaa648906757ca7aa"
 dependencies = [
  "halo2curves-axiom",
  "num-bigint",
@@ -658,7 +664,7 @@ dependencies = [
 [[package]]
 name = "openvm-algebra-moduli-macros"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#080fa6762bd6434bf74860ea5eb147c9d4c0d7a1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=f1b4844#f1b484499b9c059d14949cdfaa648906757ca7aa"
 dependencies = [
  "openvm-macros-common",
  "quote",
@@ -666,22 +672,9 @@ dependencies = [
 ]
 
 [[package]]
-name = "openvm-bigint-guest"
-version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#4fb4996837d2a823a1726c2d38614562422ed845"
-dependencies = [
- "num-bigint",
- "num-traits",
- "openvm",
- "openvm-platform",
- "serde",
- "strum_macros",
-]
-
-[[package]]
 name = "openvm-custom-insn"
 version = "0.1.0"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#080fa6762bd6434bf74860ea5eb147c9d4c0d7a1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=f1b4844#f1b484499b9c059d14949cdfaa648906757ca7aa"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -691,13 +684,13 @@ dependencies = [
 [[package]]
 name = "openvm-ecc-guest"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#080fa6762bd6434bf74860ea5eb147c9d4c0d7a1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=f1b4844#f1b484499b9c059d14949cdfaa648906757ca7aa"
 dependencies = [
  "ecdsa",
  "elliptic-curve",
  "group",
  "halo2curves-axiom",
- "hex-literal",
+ "hex-literal 0.4.1",
  "itertools",
  "k256",
  "lazy_static",
@@ -718,7 +711,7 @@ dependencies = [
 [[package]]
 name = "openvm-ecc-sw-macros"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#080fa6762bd6434bf74860ea5eb147c9d4c0d7a1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=f1b4844#f1b484499b9c059d14949cdfaa648906757ca7aa"
 dependencies = [
  "openvm-macros-common",
  "quote",
@@ -728,7 +721,7 @@ dependencies = [
 [[package]]
 name = "openvm-keccak256-guest"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#080fa6762bd6434bf74860ea5eb147c9d4c0d7a1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=f1b4844#f1b484499b9c059d14949cdfaa648906757ca7aa"
 dependencies = [
  "openvm-platform",
  "serde",
@@ -738,7 +731,7 @@ dependencies = [
 [[package]]
 name = "openvm-macros-common"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#080fa6762bd6434bf74860ea5eb147c9d4c0d7a1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=f1b4844#f1b484499b9c059d14949cdfaa648906757ca7aa"
 dependencies = [
  "syn",
 ]
@@ -746,10 +739,10 @@ dependencies = [
 [[package]]
 name = "openvm-pairing-guest"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#080fa6762bd6434bf74860ea5eb147c9d4c0d7a1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=f1b4844#f1b484499b9c059d14949cdfaa648906757ca7aa"
 dependencies = [
  "group",
- "hex-literal",
+ "hex-literal 0.4.1",
  "itertools",
  "lazy_static",
  "num-bigint",
@@ -770,7 +763,7 @@ dependencies = [
 [[package]]
 name = "openvm-platform"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#080fa6762bd6434bf74860ea5eb147c9d4c0d7a1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=f1b4844#f1b484499b9c059d14949cdfaa648906757ca7aa"
 dependencies = [
  "getrandom",
  "libm",
@@ -782,7 +775,7 @@ dependencies = [
 [[package]]
 name = "openvm-rv32im-guest"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#080fa6762bd6434bf74860ea5eb147c9d4c0d7a1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=f1b4844#f1b484499b9c059d14949cdfaa648906757ca7aa"
 dependencies = [
  "openvm-platform",
  "strum_macros",
@@ -791,7 +784,7 @@ dependencies = [
 [[package]]
 name = "openvm-sha256-guest"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#080fa6762bd6434bf74860ea5eb147c9d4c0d7a1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=f1b4844#f1b484499b9c059d14949cdfaa648906757ca7aa"
 dependencies = [
  "openvm",
  "openvm-platform",
@@ -804,16 +797,8 @@ version = "0.1.0"
 dependencies = [
  "ecdsa",
  "hex",
+ "hex-literal 1.0.0",
  "k256",
- "openvm",
- "openvm-algebra-complex-macros",
- "openvm-algebra-guest",
- "openvm-bigint-guest",
- "openvm-ecc-guest",
- "openvm-keccak256-guest",
- "openvm-pairing-guest",
- "openvm-rv32im-guest",
- "openvm-sha256-guest",
  "p256",
  "primeorder",
  "revm-precompile",
@@ -1061,9 +1046,9 @@ checksum = "3e75f6a532d0fd9f7f13144f392b6ad56a32696bfcd9c78f797f16bbb6f072d6"
 
 [[package]]
 name = "rustversion"
-version = "1.0.19"
+version = "1.0.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f7c45b9784283f1b2e7fb61b42047c2fd678ef0960d4f6f1eba131594cc369d4"
+checksum = "eded382c5f5f786b989652c49544c4877d9f015cc22e145a5ea8ea66c2921cd2"
 
 [[package]]
 name = "sec1"
