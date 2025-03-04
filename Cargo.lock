@@ -65,6 +65,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "arrayref"
+version = "0.3.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "76a2e8124351fda1ef8aaaa3bbd7ebbcb486bbcd4225aca0aa0d84bb2db8fecb"
+
+[[package]]
+name = "arrayvec"
+version = "0.7.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7c02d123df017efcdfbd739ef81735b36c5ba83ec3c59c80a9d7ecc718f92e50"
+
+[[package]]
 name = "aurora-engine-modexp"
 version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -113,6 +125,17 @@ dependencies = [
  "radium",
  "tap",
  "wyz",
+]
+
+[[package]]
+name = "blake2b_simd"
+version = "1.0.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "06e903a20b159e944f91ec8499fe1e55651480c541ea0a584f5d967c49ad9d99"
+dependencies = [
+ "arrayref",
+ "arrayvec",
+ "constant_time_eq",
 ]
 
 [[package]]
@@ -168,6 +191,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c2459377285ad874054d797f3ccebf984978aa39129f6eafde5cdc8315b612f8"
 
 [[package]]
+name = "constant_time_eq"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7c74b8349d32d297c9134b8c88677813a227df8f779daa29bfc29c183fe3dca6"
+
+[[package]]
 name = "cpufeatures"
 version = "0.2.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -175,6 +204,31 @@ checksum = "59ed5838eebb26a2bb2e58f6d5b5316989ae9d08bab10e0e6d103e656d1b0280"
 dependencies = [
  "libc",
 ]
+
+[[package]]
+name = "crossbeam-deque"
+version = "0.8.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9dd111b7b7f7d55b72c0a6ae361660ee5853c9af73f70c3c2ef6858b950e2e51"
+dependencies = [
+ "crossbeam-epoch",
+ "crossbeam-utils",
+]
+
+[[package]]
+name = "crossbeam-epoch"
+version = "0.9.18"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5b82ac4a3c2ca9c3460964f020e1402edd5753411d7737aa39c3714ad1b5420e"
+dependencies = [
+ "crossbeam-utils",
+]
+
+[[package]]
+name = "crossbeam-utils"
+version = "0.8.21"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d0a5c400df2834b80a4c3327b3aad3a4c4cd4de0629063962b03235697506a28"
 
 [[package]]
 name = "crunchy"
@@ -267,6 +321,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "either"
+version = "1.14.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b7914353092ddf589ad78f25c5c1c21b7f80b0ff8621e7c814c3485b5306da9d"
+
+[[package]]
 name = "elliptic-curve"
 version = "0.13.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -301,6 +361,7 @@ version = "0.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ded41244b729663b1e574f1b4fb731469f69f79c17667b5d776b16cda0479449"
 dependencies = [
+ "bitvec",
  "rand_core",
  "subtle",
 ]
@@ -351,6 +412,33 @@ dependencies = [
 ]
 
 [[package]]
+name = "halo2curves-axiom"
+version = "0.5.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "75bb262279138550a603b35a73da944fcde987a321eb550c05276ce7b0a4e692"
+dependencies = [
+ "blake2b_simd",
+ "digest",
+ "ff",
+ "group",
+ "hex",
+ "lazy_static",
+ "maybe-rayon",
+ "num-bigint",
+ "num-traits",
+ "pairing",
+ "pasta_curves",
+ "paste",
+ "rand",
+ "rand_core",
+ "serde",
+ "serde_arrays",
+ "sha2",
+ "static_assertions",
+ "subtle",
+]
+
+[[package]]
 name = "hashbrown"
 version = "0.15.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -370,6 +458,9 @@ name = "hex"
 version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e486a595ed5fd8f86ba55232a70"
+dependencies = [
+ "serde",
+]
 
 [[package]]
 name = "hex-literal"
@@ -384,6 +475,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6c49c37c09c17a53d937dfbb742eb3a961d65a994e6bcdcf37e7399d0cc8ab5e"
 dependencies = [
  "digest",
+]
+
+[[package]]
+name = "itertools"
+version = "0.14.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2b192c782037fadd9cfa75548310488aabdbf3d2da73885b31bd0abd03351285"
+dependencies = [
+ "either",
 ]
 
 [[package]]
@@ -424,6 +524,16 @@ name = "libm"
 version = "0.2.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8355be11b20d696c8f18f6cc018c4e372165b1fa8126cef092399c9951984ffa"
+
+[[package]]
+name = "maybe-rayon"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8ea1f30cedd69f0a2954655f7188c6a834246d2bcf1e315e2ac40c4b24dc9519"
+dependencies = [
+ "cfg-if",
+ "rayon",
+]
 
 [[package]]
 name = "num"
@@ -508,7 +618,7 @@ checksum = "945462a4b81e43c4e3ba96bd7b49d834c6f61198356aa858733bc4acf3cbe62e"
 [[package]]
 name = "openvm"
 version = "1.0.0-rc.1"
-source = "git+https://github.com/openvm-org/openvm.git?tag=v1.0.0-rc.1#30576cc6ce838f213bf05b2e4ad035d95498c8b3"
+source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#4fb4996837d2a823a1726c2d38614562422ed845"
 dependencies = [
  "bytemuck",
  "hex-literal",
@@ -520,9 +630,58 @@ dependencies = [
 ]
 
 [[package]]
+name = "openvm-algebra-complex-macros"
+version = "0.1.0"
+source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#4fb4996837d2a823a1726c2d38614562422ed845"
+dependencies = [
+ "openvm-macros-common",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "openvm-algebra-guest"
+version = "1.0.0-rc.1"
+source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#4fb4996837d2a823a1726c2d38614562422ed845"
+dependencies = [
+ "halo2curves-axiom",
+ "num-bigint",
+ "openvm",
+ "openvm-algebra-complex-macros",
+ "openvm-algebra-moduli-macros",
+ "openvm-platform",
+ "serde",
+ "serde-big-array",
+ "strum_macros",
+]
+
+[[package]]
+name = "openvm-algebra-moduli-macros"
+version = "1.0.0-rc.1"
+source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#4fb4996837d2a823a1726c2d38614562422ed845"
+dependencies = [
+ "openvm-macros-common",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "openvm-bigint-guest"
+version = "1.0.0-rc.1"
+source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#4fb4996837d2a823a1726c2d38614562422ed845"
+dependencies = [
+ "num-bigint",
+ "num-traits",
+ "openvm",
+ "openvm-platform",
+ "serde",
+ "strum_macros",
+]
+
+[[package]]
 name = "openvm-custom-insn"
 version = "0.1.0"
-source = "git+https://github.com/openvm-org/openvm.git?tag=v1.0.0-rc.1#30576cc6ce838f213bf05b2e4ad035d95498c8b3"
+source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#4fb4996837d2a823a1726c2d38614562422ed845"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -530,9 +689,88 @@ dependencies = [
 ]
 
 [[package]]
+name = "openvm-ecc-guest"
+version = "1.0.0-rc.1"
+source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#4fb4996837d2a823a1726c2d38614562422ed845"
+dependencies = [
+ "ecdsa",
+ "elliptic-curve",
+ "group",
+ "halo2curves-axiom",
+ "hex-literal",
+ "itertools",
+ "k256",
+ "lazy_static",
+ "num-bigint",
+ "num-traits",
+ "openvm",
+ "openvm-algebra-guest",
+ "openvm-algebra-moduli-macros",
+ "openvm-ecc-sw-macros",
+ "openvm-platform",
+ "openvm-rv32im-guest",
+ "p256",
+ "rand",
+ "serde",
+ "strum_macros",
+]
+
+[[package]]
+name = "openvm-ecc-sw-macros"
+version = "1.0.0-rc.1"
+source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#4fb4996837d2a823a1726c2d38614562422ed845"
+dependencies = [
+ "openvm-macros-common",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "openvm-keccak256-guest"
+version = "1.0.0-rc.1"
+source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#4fb4996837d2a823a1726c2d38614562422ed845"
+dependencies = [
+ "openvm-platform",
+ "serde",
+ "tiny-keccak",
+]
+
+[[package]]
+name = "openvm-macros-common"
+version = "1.0.0-rc.1"
+source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#4fb4996837d2a823a1726c2d38614562422ed845"
+dependencies = [
+ "syn",
+]
+
+[[package]]
+name = "openvm-pairing-guest"
+version = "1.0.0-rc.1"
+source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#4fb4996837d2a823a1726c2d38614562422ed845"
+dependencies = [
+ "group",
+ "hex-literal",
+ "itertools",
+ "lazy_static",
+ "num-bigint",
+ "num-traits",
+ "openvm",
+ "openvm-algebra-complex-macros",
+ "openvm-algebra-guest",
+ "openvm-algebra-moduli-macros",
+ "openvm-ecc-guest",
+ "openvm-ecc-sw-macros",
+ "openvm-platform",
+ "openvm-rv32im-guest",
+ "rand",
+ "serde",
+ "strum_macros",
+]
+
+[[package]]
 name = "openvm-platform"
 version = "1.0.0-rc.1"
-source = "git+https://github.com/openvm-org/openvm.git?tag=v1.0.0-rc.1#30576cc6ce838f213bf05b2e4ad035d95498c8b3"
+source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#4fb4996837d2a823a1726c2d38614562422ed845"
 dependencies = [
  "getrandom",
  "libm",
@@ -544,17 +782,40 @@ dependencies = [
 [[package]]
 name = "openvm-rv32im-guest"
 version = "1.0.0-rc.1"
-source = "git+https://github.com/openvm-org/openvm.git?tag=v1.0.0-rc.1#30576cc6ce838f213bf05b2e4ad035d95498c8b3"
+source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#4fb4996837d2a823a1726c2d38614562422ed845"
 dependencies = [
  "openvm-platform",
  "strum_macros",
 ]
 
 [[package]]
+name = "openvm-sha256-guest"
+version = "1.0.0-rc.1"
+source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?branch=main#4fb4996837d2a823a1726c2d38614562422ed845"
+dependencies = [
+ "openvm",
+ "openvm-platform",
+ "sha2",
+]
+
+[[package]]
 name = "openvm-test-secp256r1"
 version = "0.1.0"
 dependencies = [
+ "ecdsa",
+ "hex",
+ "k256",
  "openvm",
+ "openvm-algebra-complex-macros",
+ "openvm-algebra-guest",
+ "openvm-bigint-guest",
+ "openvm-ecc-guest",
+ "openvm-keccak256-guest",
+ "openvm-pairing-guest",
+ "openvm-rv32im-guest",
+ "openvm-sha256-guest",
+ "p256",
+ "primeorder",
  "revm-precompile",
 ]
 
@@ -568,6 +829,30 @@ dependencies = [
  "elliptic-curve",
  "primeorder",
  "sha2",
+]
+
+[[package]]
+name = "pairing"
+version = "0.23.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "81fec4625e73cf41ef4bb6846cafa6d44736525f442ba45e407c4a000a13996f"
+dependencies = [
+ "group",
+]
+
+[[package]]
+name = "pasta_curves"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d3e57598f73cc7e1b2ac63c79c517b31a0877cd7c402cdcaa311b5208de7a095"
+dependencies = [
+ "blake2b_simd",
+ "ff",
+ "group",
+ "lazy_static",
+ "rand",
+ "static_assertions",
+ "subtle",
 ]
 
 [[package]]
@@ -638,6 +923,8 @@ version = "0.8.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "34af8d1a0e25924bc5b7c43c079c942339d8f0a8b57c39049bef581b46327404"
 dependencies = [
+ "libc",
+ "rand_chacha",
  "rand_core",
 ]
 
@@ -656,6 +943,9 @@ name = "rand_core"
 version = "0.6.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ec0be4795e2f6a28069bec0b5ff3e2ac9bafc99e6a9a7dc3547996c5c816922c"
+dependencies = [
+ "getrandom",
+]
 
 [[package]]
 name = "rand_xorshift"
@@ -667,14 +957,38 @@ dependencies = [
 ]
 
 [[package]]
+name = "rayon"
+version = "1.10.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b418a60154510ca1a002a752ca9714984e21e4241e804d32555251faf8b78ffa"
+dependencies = [
+ "either",
+ "rayon-core",
+]
+
+[[package]]
+name = "rayon-core"
+version = "1.12.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1465873a3dfdaa8ae7cb14b4383657caab0b3e8a0aa9ae8e04b044854c8dfce2"
+dependencies = [
+ "crossbeam-deque",
+ "crossbeam-utils",
+]
+
+[[package]]
 name = "revm-precompile"
 version = "16.0.0"
-source = "git+https://github.com/scroll-tech/revm?branch=scroll-evm-executor%2Ffeat%2Fv55%2Feuclid-v2#1f677dcd24aa56e0654c7152cff32149636d9aea"
+source = "git+https://github.com/scroll-tech/revm?branch=scroll-evm-executor%2Ffeat%2Fv55%2Feuclid-v2#9a4b65222135a88ac939f3b3dea9f5a53df2dcdd"
 dependencies = [
  "aurora-engine-modexp",
  "cfg-if",
  "k256",
  "once_cell",
+ "openvm-ecc-guest",
+ "openvm-keccak256-guest",
+ "openvm-pairing-guest",
+ "openvm-sha256-guest",
  "p256",
  "revm-primitives",
  "ripemd",
@@ -685,7 +999,7 @@ dependencies = [
 [[package]]
 name = "revm-primitives"
 version = "15.1.0"
-source = "git+https://github.com/scroll-tech/revm?branch=scroll-evm-executor%2Ffeat%2Fv55%2Feuclid-v2#1f677dcd24aa56e0654c7152cff32149636d9aea"
+source = "git+https://github.com/scroll-tech/revm?branch=scroll-evm-executor%2Ffeat%2Fv55%2Feuclid-v2#9a4b65222135a88ac939f3b3dea9f5a53df2dcdd"
 dependencies = [
  "alloy-eip2930",
  "alloy-eip7702",
@@ -774,6 +1088,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "serde-big-array"
+version = "0.5.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "11fc7cc2c76d73e0f27ee52abbd64eec84d46f370c88371120433196934e4b7f"
+dependencies = [
+ "serde",
+]
+
+[[package]]
+name = "serde_arrays"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "38636132857f68ec3d5f3eb121166d2af33cb55174c4d5ff645db6165cbef0fd"
+dependencies = [
+ "serde",
+]
+
+[[package]]
 name = "serde_derive"
 version = "1.0.218"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -820,6 +1152,12 @@ dependencies = [
  "quote",
  "syn",
 ]
+
+[[package]]
+name = "static_assertions"
+version = "1.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 
 [[package]]
 name = "strum_macros"

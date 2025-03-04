@@ -1,20 +1,5 @@
 use revm_precompile::primitives::hex::FromHex;
-use revm_precompile::{secp256r1::p256_verify, Bytes, B256};
-
-openvm::entry!(main);
-
-fn test_sig_verify(input: &str, expect_success: bool) {
-    let input = Bytes::from_hex(input).unwrap();
-    let target_gas = 3_500u64;
-    let outcome = p256_verify(&input, target_gas).unwrap();
-    assert_eq!(outcome.gas_used, 3_450u64);
-    let expected_result = if expect_success {
-        B256::with_last_byte(1).into()
-    } else {
-        Bytes::new()
-    };
-    assert_eq!(outcome.bytes, expected_result);
-}
+use revm_precompile::{secp256r1, Bytes, B256};
 
 const CASES: &[(&str, bool)] =
     &[
@@ -35,8 +20,23 @@ const CASES: &[(&str, bool)] =
         ("4cee90eb86eaa050036147a12d49004b6b9c72bd725d39d4785011fe190f0b4da73bd4903f0ce3b639bbbf6e8e80d16931ff4bcf5993d58468e8fb19086e8cac36dbcd03009df8c59286b162af3bd7fcc0450c9aa81be5d10d312af6c66b1d6000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", false),
     ];
 
-fn main() {
-    for (input, expect_success) in CASES {
+    fn test_sig_verify(input: &str, expect_success: bool) {
+        let input = Bytes::from_hex(input).unwrap();
+        let target_gas = 3_500u64;
+        let outcome = secp256r1::p256_verify(&input, target_gas).unwrap();
+        assert_eq!(outcome.gas_used, 3_450u64);
+        let expected_result = if expect_success {
+            B256::with_last_byte(1).into()
+        } else {
+            Bytes::new()
+        };
+        assert_eq!(outcome.bytes, expected_result);
+    }
+    
+pub fn test_all() {
+    for (idx, (input, expect_success)) in CASES.iter().enumerate() {
+        println!("Running case {idx}");
         test_sig_verify(input, *expect_success);
+        println!("Running case {idx} done");
     }
 }
