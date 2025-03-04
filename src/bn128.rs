@@ -3,6 +3,7 @@ use revm_precompile::bn128::add::BYZANTIUM_ADD_GAS_COST;
 use revm_precompile::bn128::mul::BYZANTIUM_MUL_GAS_COST;
 use revm_precompile::bn128::pair::{BYZANTIUM_PAIR_BASE, BYZANTIUM_PAIR_PER_POINT};
 use revm_precompile::bn128::{run_add, run_mul, run_pair};
+use crate::should_eq;
 
 const BN128_ADD_CASES: &[(&str, &[u8], &[u8])] = &[
     (
@@ -71,16 +72,14 @@ const BN128_PAIR_CASES: &[(&str, &[u8], &[u8])] = &[
 fn test_alt_bn128_add() {
     for (idx, (name, input, expected)) in BN128_ADD_CASES.iter().enumerate() {
         let outcome = run_add(&input, BYZANTIUM_ADD_GAS_COST, BYZANTIUM_ADD_GAS_COST).unwrap();
-        assert_eq!(*outcome.bytes, *expected, "bn128_add#{}", name);
-        println!("\tpass: bn128_add#{idx}[{name}]");
+        should_eq!(*outcome.bytes, *expected, "bn128_add#{idx}[{name}]");
     }
 }
 
 fn test_alt_bn128_mul() {
     for (idx, (name, input, expected)) in BN128_MUL_CASES.iter().enumerate() {
         let outcome = run_mul(&input, BYZANTIUM_MUL_GAS_COST, BYZANTIUM_MUL_GAS_COST).unwrap();
-        assert_eq!(*outcome.bytes, *expected, "bn128_mul#{}", name);
-        println!("\tpass: bn128_mul#{idx}[{name}]");
+        should_eq!(*outcome.bytes, *expected, "bn128_mul#{idx}[{name}]");
     }
 }
 
@@ -93,8 +92,7 @@ fn test_alt_bn128_pair() {
             260_000,
         )
         .unwrap();
-        assert_eq!(*outcome.bytes, *expected, "bn128_pair#{}", name);
-        println!("\tpass: bn128_pair#{idx}[{name}]");
+        should_eq!(*outcome.bytes, *expected, "bn128_pair#{idx}[{name}]");
     }
 }
 

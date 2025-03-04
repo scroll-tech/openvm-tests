@@ -1,6 +1,7 @@
 use hex_literal::hex;
 use revm_precompile::hash::sha256_run;
 use revm_precompile::Bytes;
+use crate::should_eq;
 
 const CASES: &[(&str, &[u8], &[u8])] = &[
     (
@@ -44,8 +45,7 @@ pub fn test_all() {
     println!("sha256 test:");
     for (idx, (name, input, expected)) in CASES.iter().enumerate() {
         let outcome = sha256_run(&Bytes::from_static(input), u64::MAX).unwrap();
-        assert_eq!(*outcome.bytes, *expected, "sha256#{}", name);
-        println!("\tpass: sha256#{idx}[{name}]");
+        should_eq!(*outcome.bytes, *expected, "sha256#{idx}[{name}]");
     }
     println!("sha256 test done");
 }

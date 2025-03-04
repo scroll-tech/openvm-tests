@@ -55,3 +55,33 @@ fn main() {
     sha256::test_all();
     ecrecover::test_all();
 }
+
+#[macro_export]
+macro_rules! should_eq {
+    ($left:expr, $right:expr, $($arg:tt)+) => {
+        match (&$left, &$right) {
+            (left_val, right_val) => {
+                if !(*left_val == *right_val) {
+                    println!("fail: {}", format_args!($($arg)+));
+                    #[cfg(feature = "strict")]
+                    assert_eq!($left, $right, $($arg)+);
+                } else {
+                    println!("pass: {}", format_args!($($arg)+));
+                }
+            }
+        }
+    };
+}
+
+#[macro_export]
+macro_rules! should_be_true {
+    ($cond:expr, $($arg:tt)+) => {
+        if !cond {
+            println!("fail: {}", format_args!($($arg)+));
+            #[cfg(feature = "strict")]
+            assert!($cond, $($arg)+);
+        } else {
+            println!("pass: {}", format_args!($($arg)+));
+        }
+    };
+}

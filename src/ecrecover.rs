@@ -2,6 +2,7 @@ use hex_literal::hex;
 use revm_precompile::primitives::address;
 use revm_precompile::secp256k1::ec_recover_run;
 use revm_precompile::{Address, Bytes};
+use crate::{should_be_true, should_eq};
 
 const CASES: &[(&str, &[u8], Option<Address>)] = &[
     (
@@ -36,16 +37,14 @@ pub fn test_all() {
     for (idx, (name, input, expected)) in CASES.iter().enumerate() {
         let result = ec_recover_run(&Bytes::from_static(input), u64::MAX).unwrap();
         if let Some(address) = expected {
-            assert_eq!(
+            should_eq!(
                 Address::from_slice(&result.bytes[12..]),
                 *address,
-                "ecrecover#{}",
-                name
+                "ecrecover#{idx}[{name}]",
             );
         } else {
-            assert!(result.bytes.is_empty(), "ecrecover#{}", name);
+            should_be_true!(result.bytes.is_empty(), "ecrecover#{idx}[{name}]");
         }
-        println!("\tpass: ecrecover#{idx}[{name}]");
     }
     println!("ecrecover test done");
 }
