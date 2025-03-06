@@ -1,5 +1,6 @@
 mod bn128;
 mod ecrecover;
+mod modexp;
 mod secp256r1;
 mod sha256;
 
@@ -54,6 +55,7 @@ fn main() {
     bn128::test_all();
     sha256::test_all();
     ecrecover::test_all();
+    modexp::test_all();
 }
 
 #[macro_export]
