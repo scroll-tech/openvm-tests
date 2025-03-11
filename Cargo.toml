@@ -11,7 +11,7 @@ openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "830053d", fe
 openvm-algebra-complex-macros = { git = "https://github.com/openvm-org/openvm.git", rev = "830053d", default-features = false }
 openvm-algebra-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "830053d", default-features = false }
 openvm-bigint-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "830053d", default-features = false }
-openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "830053d", default-features = false }
+openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "830053d", default-features = false, features = ["k256"] }
 openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "830053d", default-features = false, features = [
     "bn254",
     "halo2curves",
