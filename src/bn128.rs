@@ -1,5 +1,8 @@
 use crate::should_eq;
 use hex_literal::hex;
+use openvm_algebra_guest::IntMod;
+use openvm_ecc_guest::AffinePoint;
+use openvm_pairing_guest::{bn254::{Bn254, Fp, Fp2}, pairing::PairingCheck};
 use revm_precompile::bn128::{run_add, run_mul, run_pair};
 
 const BN128_ADD_CASES: &[(&str, &[u8], &[u8])] = &[
@@ -324,3 +327,43 @@ pub fn test_all() {
     test_alt_bn128_pair();
     println!("bn128 test done");
 }
+
+const PAIR_ELEMENT_LEN: usize = 192;
+pub fn run_pair_local(input: &[u8]) -> bool {
+let elements = input.len() / PAIR_ELEMENT_LEN;
+
+        let mut P = Vec::with_capacity(elements);
+        let mut Q = Vec::with_capacity(elements);
+
+        // read points
+        for idx in 0..elements {
+            // At each idx, there is (G1, G2) which is 6 Fp points
+            let read_fq_at = |n: usize| {
+                debug_assert!(n < PAIR_ELEMENT_LEN / 32);
+                let start = idx * PAIR_ELEMENT_LEN + n * 32;
+                // SAFETY: We're reading `6 * 32 == PAIR_ELEMENT_LEN` bytes from `input[idx..]`
+                // per iteration. This is guaranteed to be in-bounds.
+                let slice = unsafe { input.get_unchecked(start..start + 32) };
+                Fp::from_be_bytes(&slice[..32])
+            };
+            // https://eips.ethereum.org/EIPS/eip-197, Fp2 is encoded as (a, b) where a * i + b
+            let g1_x = read_fq_at(0);
+            let g1_y = read_fq_at(1);
+            let g2_x_c1 = read_fq_at(2);
+            let g2_x_c0 = read_fq_at(3);
+            let g2_y_c1 = read_fq_at(4);
+            let g2_y_c0 = read_fq_at(5);
+
+                let g1 = AffinePoint::new(g1_x, g1_y);
+                let g2_x = Fp2::new(g2_x_c0, g2_x_c1);
+                let g2_y = Fp2::new(g2_y_c0, g2_y_c1);
+                let g2 = AffinePoint::new(g2_x, g2_y);
+
+                P.push(g1);
+                Q.push(g2);
+            
+        }
+        let success = Bn254::pairing_check(&P, &Q).is_ok();
+
+        success
+    }
