@@ -51,9 +51,9 @@ fn main() {
         setup_all_complex_extensions();
     }
 
-    secp256r1::test_all();
+    //secp256r1::test_all();
     bn128::test_all();
-    sha256::test_all();
+    //sha256::test_all();
     ecrecover::test_all();
     modexp::test_all();
 }

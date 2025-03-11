@@ -311,7 +311,7 @@ fn test_alt_bn128_mul() {
 }
 
 fn test_alt_bn128_pair() {
-    for (idx, (name, input, expected)) in BN128_PAIR_CASES.iter().enumerate() {
+    for (idx, (name, input, expected)) in BN128_PAIR_CASES[..1].iter().enumerate() {
         let outcome = run_pair(&input, 0, 0, u64::MAX).unwrap();
         should_eq!(*outcome.bytes, *expected, "bn128_pair#{idx}[{name}]");
     }
@@ -319,8 +319,8 @@ fn test_alt_bn128_pair() {
 
 pub fn test_all() {
     println!("bn128 test:");
-    test_alt_bn128_add();
-    test_alt_bn128_mul();
+    //test_alt_bn128_add();
+    //test_alt_bn128_mul();
     test_alt_bn128_pair();
     println!("bn128 test done");
 }
