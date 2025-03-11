@@ -479,7 +479,6 @@ dependencies = [
  "openvm-ecc-sw-macros",
  "openvm-platform",
  "openvm-rv32im-guest",
- "p256",
  "rand",
  "serde",
  "strum_macros",
@@ -575,15 +574,6 @@ dependencies = [
  "openvm-pairing-guest",
  "openvm-rv32im-guest",
  "primeorder",
-]
-
-[[package]]
-name = "p256"
-version = "0.13.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c9863ad85fa8f4460f9c48cb909d38a0d689dba1f6f6988a5e3e0d31071bcd4b"
-dependencies = [
- "elliptic-curve",
 ]
 
 [[package]]
