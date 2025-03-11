@@ -17,7 +17,7 @@ openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev =
     "halo2curves",
 ] }
 openvm-rv32im-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "830053d", default-features = false }
-openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "830053d", default-features = false }
+#openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "830053d", default-features = false }
 
 primeorder = { version = "0.13" }
 hex = "0.4.3"

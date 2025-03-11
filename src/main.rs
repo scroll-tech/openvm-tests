@@ -5,7 +5,7 @@ use {
     openvm_bigint_guest, // trigger extern u256 (this may be unneeded)
     openvm_ecc_guest::k256::Secp256k1Point,
     //openvm_ecc_guest::p256::P256Point,
-    openvm_keccak256_guest, // trigger extern native-keccak256
+    //openvm_keccak256_guest, // trigger extern native-keccak256
     openvm_pairing_guest::bn254::Bn254G1Affine,
 };
 
