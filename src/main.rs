@@ -3,6 +3,7 @@ mod ecrecover;
 mod modexp;
 mod secp256r1;
 mod sha256;
+mod keccak256;
 
 #[cfg(feature = "openvm")]
 #[allow(unused_imports, clippy::single_component_path_imports)]
@@ -56,6 +57,7 @@ fn main() {
     sha256::test_all();
     ecrecover::test_all();
     modexp::test_all();
+    keccak256::test_all();
 }
 
 #[macro_export]

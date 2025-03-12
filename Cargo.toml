@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 hex-literal = "0.4"
+tiny-keccak = { version = "2.0", features = ["keccak"] }
 
 revm-precompile = { git = "https://github.com/scroll-tech/revm", branch = "scroll-evm-executor/feat/v55/euclid-upgrade", default-features = false, features = [
     "secp256r1",
@@ -57,6 +58,12 @@ primeorder = { version = "0.13" }
 #openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "485caec" }
 #openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "485caec" }
 #openvm-rv32im-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "485caec" }
+
+[build-dependencies]
+hex = "0.4"
+rand = "0.9"
+rand_xoshiro = "0.7"
+tiny-keccak = { version = "2.0", features = ["keccak"] }
 
 [features]
 default = ["openvm"]
