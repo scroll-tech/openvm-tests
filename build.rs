@@ -9,6 +9,11 @@ use rand_xoshiro::Xoshiro256PlusPlus;
 use tiny_keccak::Hasher;
 
 fn main() {
+    println!("cargo:rerun-if-env-changed=KECCAK256_TEST_VECTOR_LEN");
+    println!("cargo:rerun-if-env-changed=KECCAK256_TEST_VECTOR_CASE_MIN_LEN");
+    println!("cargo:rerun-if-env-changed=KECCAK256_TEST_VECTOR_CASE_MAX_LEN");
+    println!("cargo:rerun-if-env-changed=KECCAK256_TEST_VECTOR_SEED");
+
     let out_dir = env::var_os("OUT_DIR").unwrap();
     let out_dir = Path::new(&out_dir);
     generate_keccak256_test_vector(
