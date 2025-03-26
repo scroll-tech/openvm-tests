@@ -111,7 +111,7 @@ fn read_mask() -> u8 {
 }
 
 #[cfg(feature = "openvm")]
-fn read_mask() {
+fn read_mask() -> u8 {
     openvm::io::read_vec()[0]
 }
 
