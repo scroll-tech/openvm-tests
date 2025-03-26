@@ -1,8 +1,8 @@
+use crate::should_eq;
 #[cfg(feature = "openvm")]
 use openvm_keccak256_guest::keccak256;
 #[cfg(feature = "openvm")]
 use tiny_keccak as _;
-use crate::should_eq;
 
 const CASES: &[(&[u8], [u8; 32])] = &[
     (
@@ -135,14 +135,11 @@ const CASES: &[(&[u8], [u8; 32])] = &[
     ),
 ];
 
-
 pub fn test_all() {
-    println!("keccak256 test:");
     for (idx, (input, expected)) in CASES.iter().enumerate() {
         let outcome = keccak256(input);
         should_eq!(outcome, *expected, "keccak256#{idx}");
     }
-    println!("keccak256 test done");
 }
 
 #[cfg(not(feature = "openvm"))]

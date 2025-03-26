@@ -26,10 +26,8 @@ const CASES: &[(&str, &[u8], &[u8])] = &[
 ];
 
 pub fn test_all() {
-    println!("modexp test:");
     for (idx, (name, input, expected)) in CASES.iter().enumerate() {
         let outcome = run_inner(input, u64::MAX, 0, |_, _, _, _| 0).unwrap();
         should_eq!(*outcome.bytes, *expected, "modexp#{idx}[{name}]");
     }
-    println!("modexp test done");
 }

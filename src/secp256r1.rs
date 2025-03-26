@@ -21,8 +21,7 @@ const CASES: &[(&[u8], bool)] =
         (&hex!("4cee90eb86eaa050036147a12d49004b6b9c72bd725d39d4785011fe190f0b4da73bd4903f0ce3b639bbbf6e8e80d16931ff4bcf5993d58468e8fb19086e8cac36dbcd03009df8c59286b162af3bd7fcc0450c9aa81be5d10d312af6c66b1d6000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"), false),
     ];
 
-pub fn test_all() {
-    println!("p256_verify test:");
+pub fn test_p256_verify() {
     for (idx, (input, expect_success)) in CASES.iter().enumerate() {
         let input = Bytes::from_static(input);
         let outcome = secp256r1::p256_verify(&input, 3500).unwrap();
@@ -33,5 +32,4 @@ pub fn test_all() {
         };
         should_eq!(outcome.bytes, expected_result, "p256_verify#{idx}");
     }
-    println!("p256_verify test done");
 }

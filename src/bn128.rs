@@ -307,31 +307,27 @@ const BN128_PAIR_CASES: &[(&str, &[u8], Result<&[u8], &PrecompileErrors>)] = &[
     )
 ];
 
-fn test_alt_bn128_add() {
+pub fn test_alt_bn128_add() {
     for (idx, (name, input, expected)) in BN128_ADD_CASES.iter().enumerate() {
         let outcome = run_add(&input, 0, 0).unwrap();
         should_eq!(*outcome.bytes, *expected, "bn128_add#{idx}[{name}]");
     }
 }
 
-fn test_alt_bn128_mul() {
+pub fn test_alt_bn128_mul() {
     for (idx, (name, input, expected)) in BN128_MUL_CASES.iter().enumerate() {
         let outcome = run_mul(&input, 0, 0).unwrap();
         should_eq!(*outcome.bytes, *expected, "bn128_mul#{idx}[{name}]");
     }
 }
 
-fn test_alt_bn128_pair() {
+pub fn test_alt_bn128_pair() {
     for (idx, (name, input, expected)) in BN128_PAIR_CASES.iter().enumerate() {
         let outcome = run_pair(&input, 0, 0, u64::MAX);
-        should_eq!(&outcome.as_ref().map(|r| r.bytes.as_ref()), expected, "bn128_pair#{idx}[{name}]");
+        should_eq!(
+            &outcome.as_ref().map(|r| r.bytes.as_ref()),
+            expected,
+            "bn128_pair#{idx}[{name}]"
+        );
     }
-}
-
-pub fn test_all() {
-    println!("bn128 test:");
-    test_alt_bn128_add();
-    test_alt_bn128_mul();
-    test_alt_bn128_pair();
-    println!("bn128 test done");
 }

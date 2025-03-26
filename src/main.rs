@@ -1,9 +1,10 @@
 mod bn128;
 mod ecrecover;
+mod keccak256;
 mod modexp;
 mod secp256r1;
 mod sha256;
-mod keccak256;
+
 
 #[cfg(feature = "openvm")]
 #[allow(unused_imports, clippy::single_component_path_imports)]
@@ -52,12 +53,66 @@ fn main() {
         setup_all_complex_extensions();
     }
 
-    secp256r1::test_all();
-    bn128::test_all();
-    sha256::test_all();
-    ecrecover::test_all();
-    modexp::test_all();
-    keccak256::test_all();
+    let mask = read_mask();
+
+    for (idx, (test, name)) in [
+        bn128::test_alt_bn128_add,
+        bn128::test_alt_bn128_mul,
+        bn128::test_alt_bn128_pair,
+        ecrecover::test_all,
+        modexp::test_all,
+        secp256r1::test_p256_verify,
+        sha256::test_all,
+        keccak256::test_all,
+    ]
+    .into_iter()
+    .zip([
+        "alt_bn128_add",
+        "alt_bn128_mul",
+        "alt_bn128_pair",
+        "ecrecover",
+        "modexp",
+        "p256_verify",
+        "sha256",
+        "keccak256",
+    ])
+    .enumerate()
+    {
+        if mask & (1 << idx) == 0 {
+            println!("Skipping test {name}");
+            continue;
+        }
+        println!("Running test {name}");
+        test();
+        println!("Done");
+    }
+}
+
+#[cfg(not(feature = "openvm"))]
+fn read_mask() -> u8 {
+    std::env::args()
+        .skip(1)
+        .next()
+        .map(|mask| {
+            u8::from_str_radix(&mask, 10)
+                .or_else(|_| {
+                    u8::from_str_radix(
+                        if mask.starts_with("0x") {
+                            &mask[2..]
+                        } else {
+                            &mask
+                        },
+                        16,
+                    )
+                })
+                .unwrap()
+        })
+        .unwrap_or(0xff)
+}
+
+#[cfg(feature = "openvm")]
+fn read_mask() {
+    openvm::io::read_vec()[0]
 }
 
 #[macro_export]

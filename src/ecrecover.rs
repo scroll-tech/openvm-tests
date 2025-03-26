@@ -56,7 +56,6 @@ const CASES: &[(&str, &[u8], Option<Address>)] = &[
 ];
 
 pub fn test_all() {
-    println!("ecrecover test:");
     for (idx, (name, input, expected)) in CASES.iter().enumerate() {
         let result = ec_recover_run(&Bytes::from_static(input), u64::MAX).unwrap();
         if let Some(address) = expected {
@@ -69,5 +68,4 @@ pub fn test_all() {
             should_be_true!(result.bytes.is_empty(), "ecrecover#{idx}[{name}]");
         }
     }
-    println!("ecrecover test done");
 }
