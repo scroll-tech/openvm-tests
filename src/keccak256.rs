@@ -1,8 +1,5 @@
+use alloy_primitives::keccak256;
 use crate::should_eq;
-#[cfg(feature = "openvm")]
-use openvm_keccak256_guest::keccak256;
-#[cfg(feature = "openvm")]
-use tiny_keccak as _;
 
 const CASES: &[(&[u8], [u8; 32])] = &[
     (
@@ -140,14 +137,4 @@ pub fn test_all() {
         let outcome = keccak256(input);
         should_eq!(outcome, *expected, "keccak256#{idx}");
     }
-}
-
-#[cfg(not(feature = "openvm"))]
-fn keccak256(input: &[u8]) -> [u8; 32] {
-    use tiny_keccak::Hasher;
-    let mut output = [0u8; 32];
-    let mut hasher = tiny_keccak::Keccak::v256();
-    hasher.update(input);
-    hasher.finalize(&mut output);
-    output
 }

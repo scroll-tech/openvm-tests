@@ -5,59 +5,45 @@ edition = "2021"
 
 [dependencies]
 hex-literal = "0.4"
-tiny-keccak = { version = "2.0", features = ["keccak"] }
+alloy-primitives = { version = "*" }
+getrandom = { version = "*", features = ["custom"] }
 
-revm-precompile = { git = "https://github.com/scroll-tech/revm", branch = "scroll-evm-executor/feat/v55/euclid-upgrade", default-features = false, features = [
-    "secp256r1",
-] }
-openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0", features = [
+revm-scroll = { git = "https://github.com/scroll-tech/scroll-revm.git", branch = "feat/openvm", default-features = false }
+revm-precompile = { git = "https://github.com/scroll-tech/revm", branch = "feat/reth-v74", default-features = false }
+openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "9ef822c947f14eb436e293971c969cfcb688dbe7", features = [
     "std",
 ], optional = true }
-openvm-algebra-complex-macros = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0", default-features = false, optional = true }
-openvm-algebra-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0", default-features = false, optional = true }
-openvm-bigint-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0", default-features = false, optional = true }
-#openvm-build ={ git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0", default-features = false, optional = true }
-#openvm-circuit ={ git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0", default-features = false, optional = true }
-#openvm-native-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0", default-features = false, optional = true }
-#openvm-native-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0", default-features = false, optional = true }
-#openvm-native-compiler = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0", default-features = false, optional = true }
-#openvm-native-recursion = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0", default-features = false, optional = true }
-openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0", default-features = false, features = [
-    "k256",
-    "p256",
-], optional = true }
-#openvm-instructions ={ git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0", default-features = false, optional = true }
-openvm-sha256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0", default-features = false, optional = true }
-openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0", default-features = false, optional = true }
-openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0", default-features = false, features = [
+openvm-algebra-complex-macros = { git = "https://github.com/openvm-org/openvm.git", rev = "9ef822c947f14eb436e293971c969cfcb688dbe7", default-features = false, optional = true }
+openvm-algebra-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "9ef822c947f14eb436e293971c969cfcb688dbe7", default-features = false, optional = true }
+openvm-bigint-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "9ef822c947f14eb436e293971c969cfcb688dbe7", default-features = false, optional = true }
+openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "9ef822c947f14eb436e293971c969cfcb688dbe7", default-features = false, optional = true }
+openvm-sha256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "9ef822c947f14eb436e293971c969cfcb688dbe7", default-features = false, optional = true }
+openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "9ef822c947f14eb436e293971c969cfcb688dbe7", default-features = false, optional = true }
+openvm-pairing = { git = "https://github.com/openvm-org/openvm.git", rev = "9ef822c947f14eb436e293971c969cfcb688dbe7", optional = true }
+openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "9ef822c947f14eb436e293971c969cfcb688dbe7", default-features = false, features = [
     "bn254",
 ], optional = true }
-openvm-rv32im-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0", default-features = false, optional = true }
+openvm-rv32im-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "9ef822c947f14eb436e293971c969cfcb688dbe7", default-features = false, optional = true }
 
-p256 = { version = "0.13.2", default-features = false, features = ["ecdsa"] }
-k256 = { version = "0.13.3", default-features = false, features = ["ecdsa"] }
-ecdsa-core = { version = "0.16.9", package = "ecdsa", default-features = false, features = [
-    "der",
-] }
-primeorder = { version = "0.13" }
+openvm-k256 = { package = "k256", git = "https://github.com/openvm-org/openvm.git", rev = "9ef822c947f14eb436e293971c969cfcb688dbe7", optional = true }
+openvm-p256 = { package = "p256", git = "https://github.com/openvm-org/openvm.git", rev = "9ef822c947f14eb436e293971c969cfcb688dbe7", optional = true }
 
-#[patch."https://github.com/openvm-org/openvm.git"]
-#openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0" }
-#openvm-algebra-complex-macros = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0" }
-#openvm-algebra-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0" }
-#openvm-bigint-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0" }
-#openvm-build ={ git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0" }
-#openvm-circuit ={ git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0" }
-#openvm-native-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0" }
-#openvm-native-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0" }
-#openvm-native-compiler = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0" }
-#openvm-native-recursion = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0" }
-#openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0" }
-#openvm-instructions ={ git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0" }
-#openvm-sha256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0" }
-#openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0" }
-#openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0" }
-#openvm-rv32im-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "de2d3a0" }
+[patch.crates-io]
+k256 = { git = "https://github.com/openvm-org/openvm.git", rev = "9ef822c947f14eb436e293971c969cfcb688dbe7" }
+p256 = { git = "https://github.com/openvm-org/openvm.git", rev = "9ef822c947f14eb436e293971c969cfcb688dbe7" }
+
+revm = { git = "https://github.com/scroll-tech/revm", branch = "feat/reth-v74" }
+revm-bytecode = { git = "https://github.com/scroll-tech/revm", branch = "feat/reth-v74" }
+revm-context = { git = "https://github.com/scroll-tech/revm", branch = "feat/reth-v74" }
+revm-context-interface = { git = "https://github.com/scroll-tech/revm", branch = "feat/reth-v74" }
+revm-database = { git = "https://github.com/scroll-tech/revm", branch = "feat/reth-v74" }
+revm-database-interface = { git = "https://github.com/scroll-tech/revm", branch = "feat/reth-v74" }
+revm-handler = { git = "https://github.com/scroll-tech/revm", branch = "feat/reth-v74" }
+revm-inspector = { git = "https://github.com/scroll-tech/revm", branch = "feat/reth-v74" }
+revm-interpreter = { git = "https://github.com/scroll-tech/revm", branch = "feat/reth-v74" }
+revm-precompile = { git = "https://github.com/scroll-tech/revm", branch = "feat/reth-v74" }
+revm-primitives = { git = "https://github.com/scroll-tech/revm", branch = "feat/reth-v74" }
+revm-state = { git = "https://github.com/scroll-tech/revm", branch = "feat/reth-v74" }
 
 [features]
 default = ["openvm"]
@@ -67,18 +53,17 @@ openvm = [
     "dep:openvm-algebra-complex-macros",
     "dep:openvm-algebra-guest",
     "dep:openvm-bigint-guest",
-    #"dep:openvm-build",
-    #"dep:openvm-circuit",
-    #"dep:openvm-native-circuit",
-    #"dep:openvm-native-transpiler",
-    #"dep:openvm-native-compiler",
-    #"dep:openvm-native-recursion",
     "dep:openvm-ecc-guest",
-    #"dep:openvm-instructions",
     "dep:openvm-sha256-guest",
     "dep:openvm-keccak256-guest",
     "dep:openvm-pairing-guest",
+    "dep:openvm-pairing",
     "dep:openvm-rv32im-guest",
+    "dep:openvm-k256",
+    "dep:openvm-p256",
 
-    "revm-precompile/openvm",
+    "openvm-pairing/bn254",
+
+    "alloy-primitives/native-keccak",
+    "revm-scroll/openvm",
 ]

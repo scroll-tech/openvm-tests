@@ -1,7 +1,7 @@
+use alloy_primitives::Bytes;
 use crate::should_eq;
 use hex_literal::hex;
-use revm_precompile::hash::sha256_run;
-use revm_precompile::Bytes;
+use revm_scroll::precompile::hash::sha256::run as sha256_run;
 
 const CASES: &[(&str, &[u8], &[u8])] = &[
     (

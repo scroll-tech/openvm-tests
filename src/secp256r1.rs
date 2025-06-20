@@ -1,6 +1,7 @@
+use alloy_primitives::{Bytes, B256};
 use crate::should_eq;
 use hex_literal::hex;
-use revm_precompile::{secp256r1, Bytes, B256};
+use revm_precompile::{secp256r1};
 
 const CASES: &[(&[u8], bool)] =
     &[
